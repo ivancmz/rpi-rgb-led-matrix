@@ -483,7 +483,11 @@ int main(int argc, char *argv[]) {
     return 1;
   } else if (file_imgs.size() == 1) {
     // Single image: show forever.
-    file_imgs[0]->params.wait_ms = distant_future;
+    if(file_imgs[0]->params.wait_ms <= 0)
+    {
+        fprintf(stderr, "Single image display forever.\n");
+        file_imgs[0]->params.wait_ms = distant_future;
+    }
   } else {
     for (size_t i = 0; i < file_imgs.size(); ++i) {
       ImageParams &params = file_imgs[i]->params;
